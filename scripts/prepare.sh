@@ -64,6 +64,11 @@ if [[ ! -d rootfs ]]; then
     exit 1
 fi
 
+if [[ ! -f source_sync.sh ]]; then
+    echo "[ERROR] source_sync.sh missing"
+    exit 1
+fi
+
 if [[ ! -f apply_binaries.sh ]]; then
     echo "[ERROR] apply_binaries.sh missing"
     exit 1
@@ -86,6 +91,10 @@ else
     echo
 
     sudo ./apply_binaries.sh
+
+    echo "[RUN ] source_sync.sh"
+
+    ./source_sync.sh -k -t jetson_${RELEASE}
 
     touch "${PREPARED_MARKER}"
 

@@ -1,8 +1,8 @@
-default_release: r32.7.6
+default_release: 32.7.6
 
 releases:
 
-  r32.7.6:
+  32.7.6:
 
     bsp:
       url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.6/t186/jetson-210_linux_r32.7.6_aarch64.tbz2
@@ -16,7 +16,7 @@ releases:
       url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.6/sources/public_sources.tbz2
       filename: public_sources.tbz2
 
-  r32.7.5:
+  32.7.5:
 
     bsp:
       url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.5/t186/jetson-210_linux_r32.7.5_aarch64.tbz2
