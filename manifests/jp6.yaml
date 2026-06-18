@@ -1,10 +1,10 @@
 jetpack: jp6
 
-default_release: r36.4.4
+default_release: 36.4.4
 
 releases:
 
-  r36.4.4:
+  36.4.4:
 
     bsp:
       filename: Jetson_Linux_R36.4.4_aarch64.tbz2
