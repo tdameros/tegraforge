@@ -37,6 +37,6 @@ manifest_file_name() {
     local COMPONENT="$3"
 
     yq \
-      ".releases.\"${RELEASE}\".${COMPONENT}.file" \
+      ".releases.\"${RELEASE}\".${COMPONENT}.filename" \
       "$(manifest_file "$JP")"
 }
