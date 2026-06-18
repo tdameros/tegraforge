@@ -7,13 +7,13 @@ releases:
   r36.4.4:
 
     bsp:
-      file: Jetson_Linux_R36.4.4_aarch64.tbz2
+      filename: Jetson_Linux_R36.4.4_aarch64.tbz2
       url: https://developer.download.nvidia.com/embedded/L4T/r36_Release_v4.4/release/Jetson_Linux_R36.4.4_aarch64.tbz2
 
     rootfs:
-      file: Tegra_Linux_Sample-Root-Filesystem_R36.4.4_aarch64.tbz2
+      filename: Tegra_Linux_Sample-Root-Filesystem_R36.4.4_aarch64.tbz2
       url: https://developer.download.nvidia.com/embedded/L4T/r36_Release_v4.4/release/Tegra_Linux_Sample-Root-Filesystem_R36.4.4_aarch64.tbz2
 
     sources:
-      file: public_sources.tbz2
+      filename: public_sources.tbz2
       url: https://developer.download.nvidia.com/embedded/L4T/r36_Release_v4.4/sources/public_sources.tbz2
