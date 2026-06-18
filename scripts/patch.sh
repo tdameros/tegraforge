@@ -58,8 +58,17 @@ if [[ ! -d "${L4T_DIR}" ]]; then
         "${RELEASE}"
 fi
 
-BOARD_DIR="${ROOT}/boards/${BOARD}"
+case "${BOARD}" in
+    */*|/*)
+        BOARD_DIR="$(realpath "${BOARD}")"
+        ;;
+    *)
+        BOARD_DIR="${ROOT}/boards/${BOARD}"
+        ;;
+esac
+
 PATCH_DIR="${BOARD_DIR}/patches"
+BOARD_NAME="$(basename "${BOARD_DIR}")"
 
 if [[ ! -d "${BOARD_DIR}" ]]; then
     echo "[ERROR] Board not found"
@@ -85,7 +94,7 @@ if [[ "${PATCH_COUNT}" -eq 0 ]]; then
     exit 0
 fi
 
-MARKER=".tegraforge_patched_${BOARD}"
+MARKER=".tegraforge_patched_${BOARD_NAME}"
 
 cd "${L4T_DIR}"
 

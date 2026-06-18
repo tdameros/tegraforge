@@ -47,8 +47,17 @@ echo "Release : ${RELEASE}"
 echo "Board   : ${BOARD}"
 echo
 
-BOARD_DIR="${ROOT}/boards/${BOARD}"
+case "${BOARD}" in
+    */*|/*)
+        BOARD_DIR="$(realpath "${BOARD}")"
+        ;;
+    *)
+        BOARD_DIR="${ROOT}/boards/${BOARD}"
+        ;;
+esac
+
 HOOK_DIR="${BOARD_DIR}/hooks"
+BOARD_NAME="$(basename "${BOARD_DIR}")"
 
 if [[ ! -d "${BOARD_DIR}" ]]; then
     echo "[ERROR] Board not found"
@@ -74,7 +83,7 @@ if [[ "${HOOK_COUNT}" -eq 0 ]]; then
     exit 0
 fi
 
-MARKER=".tegraforge_hooks_${BOARD}"
+MARKER=".tegraforge_hooks_${BOARD_NAME}"
 
 cd "${L4T_DIR}"
 
