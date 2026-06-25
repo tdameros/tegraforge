@@ -97,6 +97,7 @@ fi
 MARKER=".tegraforge_patched_${BOARD_NAME}"
 
 cd "${L4T_DIR}"
+git init
 
 if [[ -f "${MARKER}" ]]; then
     echo "[SKIP] BSP already patched"
