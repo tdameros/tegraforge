@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+SOURCE_ROOT_DIR="$(pwd)"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 source "${ROOT}/scripts/manifest.sh"
@@ -114,6 +115,7 @@ export ROOT
 export JETPACK
 export RELEASE
 export BOARD
+export SOURCE_ROOT_DIR
 export BUILD_DIR
 export L4T_DIR
 
