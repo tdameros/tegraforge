@@ -6,6 +6,15 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 source "${ROOT}/scripts/manifest.sh"
 
+FORCE=false
+while getopts "f" opt; do
+    case "${opt}" in
+        f) FORCE=true ;;
+        *) usage ;;
+    esac
+done
+shift $((OPTIND - 1))
+
 JETPACK="${1:-}"
 RELEASE="${2:-}"
 BOARD="${3:-}"
@@ -15,6 +24,9 @@ usage()
     echo "Usage:"
     echo "  hooks.sh jp6 my-board"
     echo "  hooks.sh jp6 r36.4.4 my-board"
+    echo ""
+    echo "Options:"
+    echo "  -f  Force re-apply hooks even if already apply"
     exit 1
 }
 
@@ -89,8 +101,13 @@ cd "${L4T_DIR}"
 git init
 
 if [[ -f "${MARKER}" ]]; then
-    echo "[SKIP] Hooks already executed"
-    exit 0
+    if [[ "${FORCE}" == true ]]; then
+        echo "[FORCE] Re-applying hooks (removing marker)"
+        rm -f "${MARKER}"
+    else
+        echo "[SKIP] Hooks already executed (use -f to force)"
+        exit 0
+    fi
 fi
 
 export ROOT

@@ -6,6 +6,15 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 source "${ROOT}/scripts/manifest.sh"
 
+FORCE=false
+while getopts "f" opt; do
+    case "${opt}" in
+        f) FORCE=true ;;
+        *) usage ;;
+    esac
+done
+shift $((OPTIND - 1))
+
 JETPACK="${1:-}"
 RELEASE="${2:-}"
 BOARD="${3:-}"
@@ -15,6 +24,9 @@ usage()
     echo "Usage:"
     echo "  patch.sh jp6 my-board"
     echo "  patch.sh jp6 r36.4.4 my-board"
+    echo ""
+    echo "Options:"
+    echo "  -f  Force re-apply patches even if already patched"
     exit 1
 }
 
@@ -100,8 +112,23 @@ cd "${L4T_DIR}"
 git init
 
 if [[ -f "${MARKER}" ]]; then
-    echo "[SKIP] BSP already patched"
-    exit 0
+    if [[ "${FORCE}" == true ]]; then
+        echo "[FORCE] Reverting patches"
+        while IFS= read -r patch; do
+            echo "  -> $(basename "${patch}")"
+            git apply --reverse "${patch}" || true
+        done < <(
+            find "${PATCH_DIR}" \
+                -maxdepth 1 \
+                -type f \
+                -name "*.patch" \
+                | sort -r
+        )
+        rm -f "${MARKER}"
+    else
+        echo "[SKIP] BSP already patched (use -f to force)"
+        exit 0
+    fi
 fi
 
 echo "[CHECK] Validating patches"
