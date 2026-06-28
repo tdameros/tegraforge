@@ -18,6 +18,8 @@ Features:
 * Docker-based reproducible builds
 * Native Linux support
 * Custom BSP packaging
+* Board-specific file injection into `Linux_for_Tegra`
+* Board-specific patches and hooks
 * Future support for custom Device Trees, kernels and drivers
 
 ---
@@ -283,6 +285,12 @@ downloads/
 
 ./scripts/prepare.sh jp6
 
+./scripts/patch.sh jp6 my-custom-board
+
+./scripts/files.sh jp6 my-custom-board
+
+./scripts/hooks.sh jp6 my-custom-board
+
 ./scripts/package.sh jp6
 ```
 
@@ -305,10 +313,11 @@ boards/
 
 └── my-custom-board/
     ├── patches/
+    ├── files/
     └── hooks/
 ```
 
-Customizations are applied after BSP preparation and before packaging.
+Customizations are applied after BSP preparation and before packaging, in this order: `patch` → `files` → `hooks`.
 
 ### BSP Patches
 
@@ -356,6 +365,50 @@ Supported targets include:
 * Kernel sources
 * BSP configuration files
 * Any file inside `Linux_for_Tegra`
+
+### BSP Files
+
+Files allow injecting static files directly into `Linux_for_Tegra` without writing a hook. The directory structure under `files/` is mirrored verbatim.
+
+Directory layout:
+
+```text
+boards/
+
+└── my-custom-board/
+    └── files/
+        └── rootfs/
+            └── etc/
+                └── motd
+```
+
+The file above is copied to `Linux_for_Tegra/rootfs/etc/motd`.
+
+#### Copy Files
+
+Default Release:
+
+```bash
+./scripts/files.sh jp6 my-custom-board
+```
+
+Specific Release:
+
+```bash
+./scripts/files.sh jp6 r36.4.4 my-custom-board
+```
+
+Force re-copy (even if already applied):
+
+```bash
+./scripts/files.sh -f jp6 r36.4.4 my-custom-board
+```
+
+#### Behavior
+
+* Files are copied in lexical order.
+* A `[WARN]` is printed when an existing file is overwritten.
+* The step is skipped on subsequent runs unless `-f` is passed (idempotent by default).
 
 ### BSP Hooks
 
