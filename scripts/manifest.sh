@@ -40,3 +40,15 @@ manifest_file_name() {
       ".releases.\"${RELEASE}\".${COMPONENT}.filename" \
       "$(manifest_file "$JP")"
 }
+
+manifest_has_component() {
+
+    local JP="$1"
+    local RELEASE="$2"
+    local COMPONENT="$3"
+
+    local VALUE
+    VALUE=$(yq ".releases.\"${RELEASE}\".${COMPONENT}.url" "$(manifest_file "$JP")")
+
+    [[ "${VALUE}" != "null" && -n "${VALUE}" ]]
+}

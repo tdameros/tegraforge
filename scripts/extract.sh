@@ -124,6 +124,40 @@ else
 
 fi
 
+#
+# Extract Toolchain
+#
+
+if manifest_has_component "${JETPACK}" "${RELEASE}" toolchain; then
+
+    TOOLCHAIN_FILE="$(manifest_file_name "$JETPACK" "$RELEASE" toolchain)"
+    TOOLCHAIN_ARCHIVE="${DOWNLOAD_DIR}/toolchain/${TOOLCHAIN_FILE}"
+    TOOLCHAIN_DIR="${BUILD_DIR}/toolchain"
+
+    [[ -f "$TOOLCHAIN_ARCHIVE" ]] || {
+        echo "Missing Toolchain archive"
+        echo "$TOOLCHAIN_ARCHIVE"
+        exit 1
+    }
+
+    if [[ ! -d "${TOOLCHAIN_DIR}" || -z "$(ls -A "${TOOLCHAIN_DIR}" 2>/dev/null)" ]]; then
+
+        echo "[EXTRACT] Toolchain"
+
+        mkdir -p "${TOOLCHAIN_DIR}"
+
+        tar -xf \
+            "$TOOLCHAIN_ARCHIVE" \
+            -C "${TOOLCHAIN_DIR}"
+
+    else
+
+        echo "[SKIP] Toolchain already extracted"
+
+    fi
+
+fi
+
 echo
 echo "[DONE]"
 echo
