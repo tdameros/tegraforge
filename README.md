@@ -88,8 +88,35 @@ Each manifest contains:
 * Available releases
 * BSP URLs
 * RootFS URLs
+* Toolchain URLs (optional, per release)
 * Source package URLs
 * Default release
+
+Example release entry with toolchain:
+
+```yaml
+releases:
+
+  35.6.4:
+
+    bsp:
+      url: https://developer.nvidia.com/...
+      filename: jetson_linux_r35.6.4_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/...
+      filename: tegra_linux_sample-root-filesystem_r35.6.4_aarch64.tbz2
+
+    toolchain:
+      url: https://developer.nvidia.com/embedded/jetson-linux/bootlin-toolchain-gcc-93
+      filename: aarch64--glibc--stable-final.tar.gz
+
+    sources:
+      url: https://developer.nvidia.com/...
+      filename: public_sources.tbz2
+```
+
+The `toolchain` key is optional. If absent for a release, the download and extract steps skip it automatically.
 
 ## Download BSP Packages
 
@@ -126,6 +153,7 @@ downloads/
     └── r36.4.4/
         ├── bsp/
         ├── rootfs/
+        ├── toolchain/     # only if defined in manifest
         └── sources/
 ```
 
@@ -150,7 +178,9 @@ build/
 
 └── jp6/
     └── r36.4.4/
-        └── Linux_for_Tegra/
+        ├── Linux_for_Tegra/
+        ├── toolchain/     # only if defined in manifest
+        └── sources/
 ```
 
 ## Prepare BSP
