@@ -1,3 +1,6 @@
+# WARNING: This manifest targets the T186 platform (Jetson AGX Xavier, Xavier NX, TX2).
+# Jetson Nano and TX1 users (T210) must use the t210/ path with jetson-210_linux_* BSP archives.
+
 default_release: 32.7.6
 
 releases:
@@ -5,7 +8,7 @@ releases:
   32.7.6:
 
     bsp:
-      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.6/t186/jetson-210_linux_r32.7.6_aarch64.tbz2
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.6/t186/jetson_linux_r32.7.6_aarch64.tbz2
       filename: jetson_linux_r32.7.6_aarch64.tbz2
 
     rootfs:
@@ -13,13 +16,13 @@ releases:
       filename: tegra_linux_sample-root-filesystem_r32.7.6_aarch64.tbz2
 
     sources:
-      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.6/sources/public_sources.tbz2
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.6/sources/t186/public_sources.tbz2
       filename: public_sources.tbz2
 
   32.7.5:
 
     bsp:
-      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.5/t186/jetson-210_linux_r32.7.5_aarch64.tbz2
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.5/t186/jetson_linux_r32.7.5_aarch64.tbz2
       filename: jetson_linux_r32.7.5_aarch64.tbz2
 
     rootfs:
@@ -27,5 +30,89 @@ releases:
       filename: tegra_linux_sample-root-filesystem_r32.7.5_aarch64.tbz2
 
     sources:
-      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.5/sources/public_sources.tbz2
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.5/sources/t186/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  32.7.4:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.4/t186/jetson_linux_r32.7.4_aarch64.tbz2
+      filename: jetson_linux_r32.7.4_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.4/t186/tegra_linux_sample-root-filesystem_r32.7.4_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r32.7.4_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.4/sources/t186/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  32.7.3:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.3/t186/jetson_linux_r32.7.3_aarch64.tbz2
+      filename: jetson_linux_r32.7.3_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.3/t186/tegra_linux_sample-root-filesystem_r32.7.3_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r32.7.3_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r32_release_v7.3/sources/t186/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  32.7.2:
+
+    bsp:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v7.2/t186/jetson_linux_r32.7.2_aarch64.tbz2
+      filename: jetson_linux_r32.7.2_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v7.2/t186/tegra_linux_sample-root-filesystem_r32.7.2_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r32.7.2_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v7.2/sources/t186/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  32.7.1:
+
+    bsp:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v7.1/t186/jetson_linux_r32.7.1_aarch64.tbz2
+      filename: jetson_linux_r32.7.1_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v7.1/t186/tegra_linux_sample-root-filesystem_r32.7.1_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r32.7.1_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v7.1/sources/t186/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  32.6.1:
+
+    bsp:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v6.1/t186/jetson_linux_r32.6.1_aarch64.tbz2
+      filename: jetson_linux_r32.6.1_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v6.1/t186/tegra_linux_sample-root-filesystem_r32.6.1_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r32.6.1_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v6.1/sources/t186/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  32.5.2:
+
+    bsp:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v5.2/t186/jetson_linux_r32.5.2_aarch64.tbz2
+      filename: jetson_linux_r32.5.2_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v5.2/t186/tegra_linux_sample-root-filesystem_r32.5.2_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r32.5.2_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/embedded/l4t/r32_release_v5.2/sources/t186/public_sources.tbz2
       filename: public_sources.tbz2

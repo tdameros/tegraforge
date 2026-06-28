@@ -30,6 +30,34 @@ releases:
       url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.2/sources/public_sources.tbz2
       filename: public_sources.tbz2
 
+  35.6.1:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.1/release/jetson_linux_r35.6.1_aarch64.tbz2
+      filename: jetson_linux_r35.6.1_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.1/release/tegra_linux_sample-root-filesystem_r35.6.1_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r35.6.1_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.1/sources/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  35.6.0:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.0/release/jetson_linux_r35.6.0_aarch64.tbz2
+      filename: jetson_linux_r35.6.0_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.0/release/tegra_linux_sample-root-filesystem_r35.6.0_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r35.6.0_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.0/sources/public_sources.tbz2
+      filename: public_sources.tbz2
+
   35.5.0:
 
     bsp:
@@ -56,4 +84,46 @@ releases:
 
     sources:
       url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v4.1/sources/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  35.3.1:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v3.1/release/jetson_linux_r35.3.1_aarch64.tbz2
+      filename: jetson_linux_r35.3.1_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v3.1/release/tegra_linux_sample-root-filesystem_r35.3.1_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r35.3.1_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v3.1/sources/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  35.2.1:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v2.1/release/jetson_linux_r35.2.1_aarch64.tbz2
+      filename: jetson_linux_r35.2.1_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v2.1/release/tegra_linux_sample-root-filesystem_r35.2.1_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r35.2.1_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v2.1/sources/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  35.1.0:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v1.0/release/jetson_linux_r35.1.0_aarch64.tbz2
+      filename: jetson_linux_r35.1.0_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v1.0/release/tegra_linux_sample-root-filesystem_r35.1.0_aarch64.tbz2
+      filename: tegra_linux_sample-root-filesystem_r35.1.0_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v1.0/sources/public_sources.tbz2
       filename: public_sources.tbz2
