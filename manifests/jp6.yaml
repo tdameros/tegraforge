@@ -1,19 +1,89 @@
 jetpack: jp6
 
-default_release: 36.4.4
+default_release: 36.5.0
 
 releases:
+
+  36.5.0:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v5.0/release/Jetson_Linux_r36.5.0_aarch64.tbz2
+      filename: Jetson_Linux_r36.5.0_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v5.0/release/Tegra_Linux_Sample-Root-Filesystem_r36.5.0_aarch64.tbz2
+      filename: Tegra_Linux_Sample-Root-Filesystem_r36.5.0_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v5.0/sources/public_sources.tbz2
+      filename: public_sources.tbz2
 
   36.4.4:
 
     bsp:
-      filename: Jetson_Linux_R36.4.4_aarch64.tbz2
-      url: https://developer.download.nvidia.com/embedded/L4T/r36_Release_v4.4/release/Jetson_Linux_R36.4.4_aarch64.tbz2
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.4/release/Jetson_Linux_r36.4.4_aarch64.tbz2
+      filename: Jetson_Linux_r36.4.4_aarch64.tbz2
 
     rootfs:
-      filename: Tegra_Linux_Sample-Root-Filesystem_R36.4.4_aarch64.tbz2
-      url: https://developer.download.nvidia.com/embedded/L4T/r36_Release_v4.4/release/Tegra_Linux_Sample-Root-Filesystem_R36.4.4_aarch64.tbz2
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.4/release/Tegra_Linux_Sample-Root-Filesystem_r36.4.4_aarch64.tbz2
+      filename: Tegra_Linux_Sample-Root-Filesystem_r36.4.4_aarch64.tbz2
 
     sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.4/sources/public_sources.tbz2
       filename: public_sources.tbz2
-      url: https://developer.download.nvidia.com/embedded/L4T/r36_Release_v4.4/sources/public_sources.tbz2
+
+  36.4.3:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.3/release/Jetson_Linux_r36.4.3_aarch64.tbz2
+      filename: Jetson_Linux_r36.4.3_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.3/release/Tegra_Linux_Sample-Root-Filesystem_r36.4.3_aarch64.tbz2
+      filename: Tegra_Linux_Sample-Root-Filesystem_r36.4.3_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.3/sources/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  36.4.0:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.0/release/Jetson_Linux_r36.4.0_aarch64.tbz2
+      filename: Jetson_Linux_r36.4.0_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.0/release/Tegra_Linux_Sample-Root-Filesystem_r36.4.0_aarch64.tbz2
+      filename: Tegra_Linux_Sample-Root-Filesystem_r36.4.0_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v4.0/sources/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  36.3.0:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v3.0/release/Jetson_Linux_r36.3.0_aarch64.tbz2
+      filename: Jetson_Linux_r36.3.0_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v3.0/release/Tegra_Linux_Sample-Root-Filesystem_r36.3.0_aarch64.tbz2
+      filename: Tegra_Linux_Sample-Root-Filesystem_r36.3.0_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v3.0/sources/public_sources.tbz2
+      filename: public_sources.tbz2
+
+  36.2.0:
+
+    bsp:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v2.0/release/Jetson_Linux_r36.2.0_aarch64.tbz2
+      filename: Jetson_Linux_r36.2.0_aarch64.tbz2
+
+    rootfs:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v2.0/release/Tegra_Linux_Sample-Root-Filesystem_r36.2.0_aarch64.tbz2
+      filename: Tegra_Linux_Sample-Root-Filesystem_r36.2.0_aarch64.tbz2
+
+    sources:
+      url: https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v2.0/sources/public_sources.tbz2
+      filename: public_sources.tbz2
