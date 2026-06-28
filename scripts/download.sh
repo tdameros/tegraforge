@@ -23,7 +23,7 @@ fi
 
 TARGET="${ROOT}/downloads/${JETPACK}/${RELEASE}"
 
-mkdir -p "${TARGET}"/{bsp,rootfs,sources}
+mkdir -p "${TARGET}"/{bsp,rootfs,sources,toolchain}
 
 download_component() {
 
@@ -54,6 +54,10 @@ download_component() {
 download_component bsp
 download_component rootfs
 download_component sources
+
+if manifest_has_component "${JETPACK}" "${RELEASE}" toolchain; then
+    download_component toolchain
+fi
 
 echo
 echo "Done."
