@@ -215,6 +215,71 @@ Prepared BSP location:
 build/jp6/r36.4.4/Linux_for_Tegra
 ```
 
+## Build Kernel
+
+Compiles the kernel, device trees and modules from sources synced by `prepare.sh` (`source_sync.sh`).
+Requires a toolchain defined in the manifest for this release.
+
+### Build Default Release
+
+```bash
+./scripts/build.sh jp5
+```
+
+### Build Specific Release
+
+```bash
+./scripts/build.sh jp5 35.6.4
+```
+
+Force rebuild:
+
+```bash
+./scripts/build.sh -f jp5 35.6.4
+```
+
+### Build Result
+
+```text
+build/
+
+└── jp5/
+    └── 35.6.4/
+        ├── kernel_out/          # compiled Image, dtbs, modules
+        └── modules_out/         # installed module tree
+```
+
+The kernel source is auto-detected under `Linux_for_Tegra/sources/`.
+The cross-compiler is resolved from `toolchain/bin/aarch64-linux-`.
+
+## Install Kernel
+
+Copies the built kernel artifacts into `Linux_for_Tegra/`:
+
+| Artifact | Destination |
+|----------|-------------|
+| `Image` | `Linux_for_Tegra/kernel/Image` |
+| `*.dtb` (nvidia/) | `Linux_for_Tegra/kernel/dtb/` |
+| modules | `Linux_for_Tegra/rootfs/lib/modules/` |
+
+### Install Default Release
+
+```bash
+./scripts/install-kernel.sh jp5
+```
+
+### Install Specific Release
+
+```bash
+./scripts/install-kernel.sh jp5 35.6.4
+```
+
+Force re-install:
+
+```bash
+./scripts/install-kernel.sh -f jp5 35.6.4
+```
+
 ## Package BSP
 
 Generate a portable flash package.
@@ -320,6 +385,10 @@ downloads/
 ./scripts/files.sh jp6 my-custom-board
 
 ./scripts/hooks.sh jp6 my-custom-board
+
+./scripts/build.sh jp6
+
+./scripts/install-kernel.sh jp6
 
 ./scripts/package.sh jp6
 ```
