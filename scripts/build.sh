@@ -7,9 +7,11 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 source "${ROOT}/scripts/manifest.sh"
 
 FORCE=false
-while getopts "f" opt; do
+DTBS_ONLY=false
+while getopts "fd" opt; do
     case "${opt}" in
         f) FORCE=true ;;
+        d) DTBS_ONLY=true ;;
         *) usage ;;
     esac
 done
@@ -26,6 +28,7 @@ usage()
     echo ""
     echo "Options:"
     echo "  -f  Force rebuild even if already built"
+    echo "  -d  Build DTBs only (skips Image, modules)"
     exit 1
 }
 
@@ -43,24 +46,32 @@ TOOLCHAIN_DIR="${BUILD_DIR}/toolchain"
 KERNEL_OUT="${BUILD_DIR}/kernel_out"
 MODULES_OUT="${BUILD_DIR}/modules_out"
 MARKER="${BUILD_DIR}/.tegraforge_build"
+MARKER_DTBS="${BUILD_DIR}/.tegraforge_dtbs"
 
 echo
 echo "========================================"
 echo " TegraForge Build"
 echo "========================================"
 echo
-echo "JetPack : ${JETPACK}"
-echo "Release : ${RELEASE}"
+echo "JetPack  : ${JETPACK}"
+echo "Release  : ${RELEASE}"
+echo "DTBs only: ${DTBS_ONLY}"
 echo
 
 #
 # Idempotency
 #
 
-if [[ -f "${MARKER}" ]]; then
+if [[ "${DTBS_ONLY}" == true ]]; then
+    ACTIVE_MARKER="${MARKER_DTBS}"
+else
+    ACTIVE_MARKER="${MARKER}"
+fi
+
+if [[ -f "${ACTIVE_MARKER}" ]]; then
     if [[ "${FORCE}" == true ]]; then
         echo "[FORCE] Re-building (removing marker)"
-        rm -f "${MARKER}"
+        rm -f "${ACTIVE_MARKER}"
     else
         echo "[SKIP] Already built (use -f to force)"
         exit 0
@@ -73,7 +84,7 @@ fi
 
 echo "[DETECT] Kernel source"
 
-KERNEL_SRC="$(find "${L4T_DIR}/sources" -maxdepth 6 -path "*/arch/arm64/Kconfig" 2>/dev/null \
+KERNEL_SRC="$(find "${L4T_DIR}/sources/kernel" -maxdepth 6 -path "*/kernel-*/arch/arm64/Kconfig" 2>/dev/null \
     | head -1 \
     | sed 's|/arch/arm64/Kconfig||')"
 
@@ -125,12 +136,21 @@ echo "[BUILD] defconfig"
 make "${MAKE_ARGS[@]}" tegra_defconfig
 
 echo
-echo "[BUILD] Image"
-make "${MAKE_ARGS[@]}" -j"$(nproc)" Image
-
-echo
 echo "[BUILD] dtbs"
 make "${MAKE_ARGS[@]}" -j"$(nproc)" dtbs
+
+if [[ "${DTBS_ONLY}" == true ]]; then
+    touch "${MARKER_DTBS}"
+    echo
+    echo "[DONE] DTBs only"
+    echo
+    echo "Kernel output : ${KERNEL_OUT}/arch/arm64/boot/dts"
+    exit 0
+fi
+
+echo
+echo "[BUILD] Image"
+make "${MAKE_ARGS[@]}" -j"$(nproc)" Image
 
 echo
 echo "[BUILD] modules"

@@ -7,9 +7,11 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 source "${ROOT}/scripts/manifest.sh"
 
 FORCE=false
-while getopts "f" opt; do
+DTBS_ONLY=false
+while getopts "fd" opt; do
     case "${opt}" in
         f) FORCE=true ;;
+        d) DTBS_ONLY=true ;;
         *) usage ;;
     esac
 done
@@ -26,6 +28,7 @@ usage()
     echo ""
     echo "Options:"
     echo "  -f  Force re-install even if already installed"
+    echo "  -d  Install DTBs only (skips Image, modules)"
     exit 1
 }
 
@@ -42,24 +45,32 @@ L4T_DIR="${BUILD_DIR}/Linux_for_Tegra"
 KERNEL_OUT="${BUILD_DIR}/kernel_out"
 MODULES_OUT="${BUILD_DIR}/modules_out"
 MARKER="${BUILD_DIR}/.tegraforge_install_kernel"
+MARKER_DTBS="${BUILD_DIR}/.tegraforge_install_dtbs"
 
 echo
 echo "========================================"
 echo " TegraForge Install Kernel"
 echo "========================================"
 echo
-echo "JetPack : ${JETPACK}"
-echo "Release : ${RELEASE}"
+echo "JetPack  : ${JETPACK}"
+echo "Release  : ${RELEASE}"
+echo "DTBs only: ${DTBS_ONLY}"
 echo
 
 #
 # Idempotency
 #
 
-if [[ -f "${MARKER}" ]]; then
+if [[ "${DTBS_ONLY}" == true ]]; then
+    ACTIVE_MARKER="${MARKER_DTBS}"
+else
+    ACTIVE_MARKER="${MARKER}"
+fi
+
+if [[ -f "${ACTIVE_MARKER}" ]]; then
     if [[ "${FORCE}" == true ]]; then
         echo "[FORCE] Re-installing (removing marker)"
-        rm -f "${MARKER}"
+        rm -f "${ACTIVE_MARKER}"
     else
         echo "[SKIP] Already installed (use -f to force)"
         exit 0
@@ -70,8 +81,14 @@ fi
 # Sanity checks
 #
 
-if [[ ! -f "${KERNEL_OUT}/arch/arm64/boot/Image" ]]; then
+if [[ "${DTBS_ONLY}" == false ]] && [[ ! -f "${KERNEL_OUT}/arch/arm64/boot/Image" ]]; then
     echo "[ERROR] Kernel Image not found"
+    echo "        Run build.sh first"
+    exit 1
+fi
+
+if [[ ! -d "${KERNEL_OUT}/arch/arm64/boot/dts/nvidia" ]]; then
+    echo "[ERROR] DTBs not found"
     echo "        Run build.sh first"
     exit 1
 fi
@@ -86,8 +103,10 @@ fi
 # Install Image
 #
 
-echo "[INSTALL] Image"
-cp "${KERNEL_OUT}/arch/arm64/boot/Image" "${L4T_DIR}/kernel/Image"
+if [[ "${DTBS_ONLY}" == false ]]; then
+    echo "[INSTALL] Image"
+    cp "${KERNEL_OUT}/arch/arm64/boot/Image" "${L4T_DIR}/kernel/Image"
+fi
 
 #
 # Install dtbs
@@ -109,11 +128,13 @@ done
 # Install modules
 #
 
-echo "[INSTALL] modules"
+if [[ "${DTBS_ONLY}" == false ]]; then
+    echo "[INSTALL] modules"
 
-sudo cp -rp "${MODULES_OUT}/lib/modules/." "${L4T_DIR}/rootfs/lib/modules/"
+    sudo cp -rp "${MODULES_OUT}/lib/modules/." "${L4T_DIR}/rootfs/lib/modules/"
+fi
 
-touch "${MARKER}"
+touch "${ACTIVE_MARKER}"
 
 echo
 echo "[DONE]"
