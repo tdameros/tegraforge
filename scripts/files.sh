@@ -115,8 +115,8 @@ while IFS= read -r src_file; do
         echo "  -> ${rel_path}"
     fi
 
-    mkdir -p "$(dirname "${dst_file}")"
-    cp -p "${src_file}" "${dst_file}"
+    sudo mkdir -p "$(dirname "${dst_file}")"
+    sudo cp -p "${src_file}" "${dst_file}"
 
 done < <(find "${FILES_DIR}" -type f | sort)
 
