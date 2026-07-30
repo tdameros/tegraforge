@@ -132,6 +132,19 @@ if [[ "${DTBS_ONLY}" == false ]]; then
     echo "[INSTALL] modules"
 
     sudo cp -rp "${MODULES_OUT}/lib/modules/." "${L4T_DIR}/rootfs/lib/modules/"
+
+    echo "[DEPMOD] Regenerating modules.dep"
+
+    KERNEL_VERSION="$(ls "${MODULES_OUT}/lib/modules/")"
+
+    sudo depmod -a -b "${L4T_DIR}/rootfs" "${KERNEL_VERSION}"
+
+    if [[ ! -f "${L4T_DIR}/rootfs/lib/modules/${KERNEL_VERSION}/modules.dep" ]]; then
+        echo "[ERROR] modules.dep missing after depmod"
+        exit 1
+    fi
+
+    echo "  -> ${KERNEL_VERSION}: modules.dep OK"
 fi
 
 touch "${ACTIVE_MARKER}"
